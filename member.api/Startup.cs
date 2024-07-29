@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +10,11 @@ using Microsoft.OpenApi.Models;
 using member.api.Models;
 using NLog;
 using member.api.Shared.DefaultException;
+using member.api.Shared.Services;
+using static member.api.Shared.Models.Vault;
+using Newtonsoft.Json;
+using Flurl.Http;
+using System.Text.Json.Serialization;
 
 namespace member.api
 {
@@ -39,6 +42,14 @@ namespace member.api
 
             // Adds health check service
             services.AddHealthChecks();
+
+            var appSettings = new AppSettings
+            {
+                VaultHost = this.Configuration.GetSection("VaultHost").Get<string>(),
+                Member = this.Configuration.GetSection("Member").Get<string>(),
+            };
+
+            appSettings.CredentialSetting = this._Credential(appSettings);
 
             #region Swagger
             // Read Swagger settings
@@ -117,6 +128,23 @@ namespace member.api
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
             });
+        }
+        private CredentialSetting _Credential(AppSettings appSettings)
+        {
+            var securityEncrpytion = new SecurityEncryption();
+            var vaultHost = securityEncrpytion.RSADecrypt(appSettings.VaultHost);
+            var Token = securityEncrpytion.RSADecrypt(appSettings.Member);
+
+            var vaultService = new VaultService(new VaultConfig
+            {
+                Url = new FlurlClient(vaultHost),
+                Token = Token,
+            });
+
+            var credentialTxt = vaultService.GetCredential("secret/data/member").Result;
+
+            var credential = JsonConvert.DeserializeObject<CredentialSetting>(credentialTxt);
+            return credential;
         }
     }
 }
