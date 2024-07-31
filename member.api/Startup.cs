@@ -15,6 +15,7 @@ using static member.api.Shared.Models.Vault;
 using Newtonsoft.Json;
 using Flurl.Http;
 using System.Text.Json.Serialization;
+using member.api.Extension;
 
 namespace member.api
 {
@@ -75,7 +76,10 @@ namespace member.api
             #endregion
 
             #region Dependency Injection
-            // For more information, visit https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection
+            services.ConfigureScopeFacades(appSettings);
+            services.ConfigureScopeService(appSettings);
+            services.ConfigureScopeRepository(appSettings);
+            // services.ConfigureScopeMappers(appSettings);
             #endregion
         }
 
