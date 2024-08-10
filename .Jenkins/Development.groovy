@@ -1,5 +1,5 @@
 def projectName = 'member.api'
-def gitUri = 'http://workstation01.devshift.local/dotnet/member.api.git'
+def gitUri = 'https://github.com/punnawutbu/member.api.git'
 def gitBranch = 'refs/heads/master'
 def publishProject = 'member.api/member.api.csproj'
 def dockerTag = 'workstation01.devshift.local:5000/member.api:latest'
