@@ -1,5 +1,5 @@
 def projectName = 'member.api'
-def gitUri = 'http://linuxdev02.nio.ngg.local/dotnet/member.api.git'
+def gitUri = 'https://github.com/punnawutbu/member.api.git'
 def dockerTag = 'linuxdev02.nio.ngg.local:5000/member.api'
 def dockerComposeFile = 'Production/docker-compose.yml'
 

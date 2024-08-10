@@ -1,6 +1,6 @@
 def projectName = 'member.api'
 def gitUri = 'https://github.com/punnawutbu/member.api.git'
-def gitBranch = 'refs/heads/master'
+def gitBranch = 'refs/heads/main'
 def publishProject = 'member.api/member.api.csproj'
 def dockerTag = 'workstation01.devshift.local:5000/member.api:latest'
 def dockerComposeFile = 'Development/docker-compose.yml'

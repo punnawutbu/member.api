@@ -1,5 +1,5 @@
 def folderName = 'member.api'
-def gitUrl = 'http://linuxdev02.nio.ngg.local/dotnet/member.api.git'
+def gitUrl = 'https://github.com/punnawutbu/member.api.git'
 def gitBranch = 'refs/heads/master'
  
 folder(folderName)
