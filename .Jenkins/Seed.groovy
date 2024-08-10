@@ -1,6 +1,6 @@
 def folderName = 'member.api'
 def gitUrl = 'https://github.com/punnawutbu/member.api.git'
-def gitBranch = 'refs/heads/master'
+def gitBranch = 'refs/heads/main'
  
 folder(folderName)
 job("$folderName/Seed") {
