@@ -1,6 +1,6 @@
 def projectName = 'member.api'
 def gitUri = 'https://github.com/punnawutbu/member.api.git'
-def dockerTag = 'linuxdev02.nio.ngg.local:5000/member.api'
+def dockerTag = 'Production:5000/member.api'
 def dockerComposeFile = 'Production/docker-compose.yml'
 
 folder(projectName)
@@ -23,7 +23,7 @@ pipelineJob("$projectName/Production/Deploy_pmcs01n1") {
                 def _dockerTag = '$dockerTag'.replaceAll(/:\\w+\$/, '') + ":\$Tag"
 
                 netProduction {
-                    remoteHost = 'pmcs01n1.nio.ngg.local'
+                    remoteHost = 'pmcs01n1.devshift.local'
                     gitUri = '$gitUri'
                     gitBranch = _gitBranch
                     projectName = '$projectName'
@@ -50,7 +50,7 @@ pipelineJob("$projectName/Production/Deploy_pmcs02n2") {
                 def _dockerTag = '$dockerTag'.replaceAll(/:\\w+\$/, '') + ":\$Tag"
 
                 netProduction {
-                    remoteHost = 'pmcs02n2.nio.ngg.local'
+                    remoteHost = 'pmcs02n2.devshift.local'
                     gitUri = '$gitUri'
                     gitBranch = _gitBranch
                     projectName = '$projectName'

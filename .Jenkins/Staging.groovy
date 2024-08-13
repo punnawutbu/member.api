@@ -1,6 +1,6 @@
 def projectName = 'member.api'
-def gitUri = 'http://linuxdev02.nio.ngg.local/dotnet/member.api.git'
-def dockerTag = 'linuxdev02.nio.ngg.local:5000/member.api'
+def gitUri = 'http://Staging/dotnet/member.api.git'
+def dockerTag = 'Staging:5000/member.api'
 def dockerComposeFile1 = 'Staging/docker-compose.yml'
 
 folder(projectName)
@@ -23,7 +23,7 @@ pipelineJob("$projectName/Staging/Deploy_umcs01n1") {
                 def _dockerTag = '$dockerTag'.replaceAll(/:\\w+\$/, '') + ":\$Tag"
 
                 netStaging {
-                    remoteHost = 'umcs01n1.nio.ngg.local'
+                    remoteHost = 'umcs01n1.devshift.local'
                     gitUri = '$gitUri'
                     gitBranch = _gitBranch
                     projectName = '$projectName'
